@@ -217,7 +217,7 @@
     if(!R)return false;
     host.classList.add('esq');
     swapLogos(document);swapLogos(R);
-    appLink=document.createElement('link');appLink.rel='stylesheet';appLink.href='grinder-esquadrao-app.css?v=esq3';appLink.setAttribute('data-esq','');
+    appLink=document.createElement('link');appLink.rel='stylesheet';appLink.href='grinder-esquadrao-app.css?v=esq4';appLink.setAttribute('data-esq','');
     R.appendChild(appLink);
     new MutationObserver(()=>{keepLinkLast();refresh();}).observe(R,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','class','style']});
     R.addEventListener('click',e=>{

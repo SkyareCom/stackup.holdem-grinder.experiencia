@@ -17,10 +17,10 @@ index 1ac32cd..e840253 100644
     - todo botão/card em vidro, borda 1px; clicado = vidro azul #155bbd, título #6fa4ff;
 diff --git a/PADRAO-ESQUADRAO.md b/PADRAO-ESQUADRAO.md
 new file mode 100644
-index 0000000..58cf1e5
+index 0000000..7e6cdce
 --- /dev/null
 +++ b/PADRAO-ESQUADRAO.md
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,52 @@
 +# Padrão ESQUADRÃO (tema visual atual do GRINDER)
 +
 +Substitui o visual do `PADRAO-GRINDER.md` (vidro azul + Bebrush). Estrutura de telas, navegação, regras de Voltar e os 3 idiomas continuam valendo como no padrão anterior.
@@ -69,6 +69,10 @@ index 0000000..58cf1e5
 +  - **Disciplina**: spots em que a ação indicada é fold/check.
 +- Classe = maior atributo (Agressor, Estrategista, Inabalável, Sentinela); sem dados = Em avaliação.
 +- Missão do dia: 20 spots respondidos no dia.
++
++## Cobertura
++Todas as telas usam o tema: login, abertura, QG, Briefing, Operações especiais, Missão (mesa, resultado, análise, salvar treino), Batalha (Resumo, Evolução, Situações, Sessões, Relatório), Personal, Performance (Eu Herói × Eu Vilão), Perfil (WhatsApp Coach, dados), Arquivo, Dossiê, API × API, Assistência IA e Loja.
++Componente novo deve usar as placas (`clip-path` chanfrado), não `border-radius`. Botões dentro dos painéis já herdam o visual: `.primary`/`.on` = energia ciano, `.danger` = contorno vermelho.
 diff --git a/PADRAO-GRINDER.md b/PADRAO-GRINDER.md
 index aea7d67..c6967bc 100644
 --- a/PADRAO-GRINDER.md
@@ -9302,7 +9306,7 @@ HcmV?d00001
 
 diff --git a/core/stackup-esquadrao.js b/core/stackup-esquadrao.js
 new file mode 100644
-index 0000000..003f8b1
+index 0000000..53f95b6
 --- /dev/null
 +++ b/core/stackup-esquadrao.js
 @@ -0,0 +1,238 @@
@@ -9525,7 +9529,7 @@ index 0000000..003f8b1
 +    if(!R)return false;
 +    host.classList.add('esq');
 +    swapLogos(document);swapLogos(R);
-+    appLink=document.createElement('link');appLink.rel='stylesheet';appLink.href='grinder-esquadrao-app.css?v=esq3';appLink.setAttribute('data-esq','');
++    appLink=document.createElement('link');appLink.rel='stylesheet';appLink.href='grinder-esquadrao-app.css?v=esq4';appLink.setAttribute('data-esq','');
 +    R.appendChild(appLink);
 +    new MutationObserver(()=>{keepLinkLast();refresh();}).observe(R,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','class','style']});
 +    R.addEventListener('click',e=>{
@@ -9546,10 +9550,10 @@ index 0000000..003f8b1
 +})(window);
 diff --git a/grinder-esquadrao-app.css b/grinder-esquadrao-app.css
 new file mode 100644
-index 0000000..f611743
+index 0000000..c0cb591
 --- /dev/null
 +++ b/grinder-esquadrao-app.css
-@@ -0,0 +1,231 @@
+@@ -0,0 +1,309 @@
 +/* =====================================================================
 +   GRINDER · TEMA ESQUADRÃO — camada do app (dentro do shadow root #app2)
 +   Sempre carregada por último (core/stackup-esquadrao.js mantém o <link>
@@ -9781,6 +9785,84 @@ index 0000000..f611743
 +@media (prefers-reduced-motion:reduce){:host(.esq) *{transition:none!important}}
 +
 +:host(.esq) .towers .tower b{font-size:15px!important;letter-spacing:1px!important;word-break:keep-all!important;overflow-wrap:normal!important}
++
++/* =====================================================================
++   MIGRAÇÃO COMPLETA — painéis internos (Batalha, Personal, Performance,
++   Perfil, Arquivo, Dossiê, Operações) e restos do azul antigo
++   ===================================================================== */
++/* botões dentro dos painéis */
++:host(.esq) .historypanel button,:host(.esq) .reportspanel button,:host(.esq) .statspanel button,:host(.esq) .personalpanel button,
++:host(.esq) .coachprofile button,:host(.esq) .performancepanel button,:host(.esq) .spotsaveform button{
++  border:0!important;border-radius:0!important;clip-path:var(--esq-cut-s);
++  background:var(--esq-plate)!important;box-shadow:var(--esq-plate-hl)!important;color:var(--esq-text)!important;
++  font-family:var(--esq-label)!important;font-weight:700!important;letter-spacing:1.5px!important;text-transform:uppercase}
++:host(.esq) .historypanel button.on,:host(.esq) .historypanel button.primary,:host(.esq) .statspanel button.primary,
++:host(.esq) .performancepanel button.primary,:host(.esq) .personalpanel button.primary,:host(.esq) .coachprofile button.coachsave,
++:host(.esq) .reportspanel button.on,:host(.esq) .coachprofile button.on,:host(.esq) .spotsaveform [data-spot-save-confirm]{
++  background:var(--esq-energy)!important;color:var(--esq-cyan-ink)!important;box-shadow:none!important}
++:host(.esq) .performancepanel .perftraining button,:host(.esq) .personalpanel .personalactions button{
++  background:transparent!important;box-shadow:inset 0 0 0 1px var(--esq-cyan)!important;color:var(--esq-cyan-hi)!important}
++:host(.esq) button.danger,:host(.esq) .dataaction.danger{background:rgba(227,38,59,.10)!important;box-shadow:inset 0 0 0 1px rgba(227,38,59,.55)!important;color:#FF7A88!important}
++/* abas internas (reafirmadas depois da regra genérica) */
++:host(.esq) .statspanel .statsnav button,:host(.esq) .statspanel .statsnav5 button,:host(.esq) .personalpanel .personaltabs button{
++  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)!important;background:#1A2030!important;color:var(--esq-muted)!important;box-shadow:none!important}
++:host(.esq) .statspanel .statsnav button.on,:host(.esq) .statspanel .statsnav5 button.on,:host(.esq) .personalpanel .personaltabs button.on{
++  background:var(--esq-energy)!important;color:var(--esq-cyan-ink)!important}
++:host(.esq) .statsnav,:host(.esq) .statsnav5,:host(.esq) .personaltabs{border:0!important;border-radius:0!important;background:#0B0F18!important;box-shadow:inset 0 0 0 1px var(--esq-edge)!important}
++
++/* placas secundárias */
++:host(.esq) .coachtemplate,:host(.esq) .perfdiff,:host(.esq) .perfevent,:host(.esq) .perfsection,:host(.esq) .perfside,:host(.esq) .perfstat,
++:host(.esq) .perfswotblock,:host(.esq) .personalstat,:host(.esq) .reportshead,:host(.esq) .statsadvancecard,:host(.esq) .statsevolutionkpi,
++:host(.esq) .statsmini,:host(.esq) .coachstatus,:host(.esq) .statsswot > *,:host(.esq) .perfpriorityitem,:host(.esq) .personalbadge,
++:host(.esq) .statsplan,:host(.esq) .statsdetail,:host(.esq) .perftraining,:host(.esq) .perfduel,:host(.esq) .personalhero,:host(.esq) .slot{
++  border:0!important;border-radius:0!important;clip-path:var(--esq-cut-s);
++  background:linear-gradient(180deg,#1A2030,#121722)!important;box-shadow:inset 0 0 0 1px var(--esq-edge)!important}
++:host(.esq) .perfside.hero{box-shadow:inset 0 0 0 1px var(--esq-cyan),inset 0 0 18px rgba(34,200,255,.18)!important}
++:host(.esq) .perfside.hero strong{color:var(--esq-cyan-hi)!important}
++:host(.esq) .perfside:not(.hero){box-shadow:inset 0 0 0 1px rgba(227,38,59,.55),inset 0 0 18px rgba(227,38,59,.14)!important}
++:host(.esq) .perfside:not(.hero) strong{color:#FF7A88!important}
++:host(.esq) .perfduel{background:linear-gradient(145deg,rgba(34,200,255,.10),#121722 50%,rgba(227,38,59,.10))!important}
++:host(.esq) .statslevel{border-radius:0!important;clip-path:var(--esq-hex);min-width:86px!important;padding:16px 8px!important;
++  background:linear-gradient(180deg,#3A1018,#1C0B10)!important;border:0!important;box-shadow:none!important}
++:host(.esq) .statslevel b{font-family:var(--esq-display)!important;color:#FF7A88!important;font-size:18px!important;letter-spacing:1.5px!important}
++:host(.esq) .statsadvancecard strong,:host(.esq) .perfpriorityitem strong{color:var(--esq-cyan)!important;font-family:var(--esq-display)!important}
++:host(.esq) .perfpriorityitem strong{border-radius:0!important;clip-path:var(--esq-hex);background:rgba(227,38,59,.25)!important;color:#fff!important}
++:host(.esq) .personalbadge{color:var(--esq-cyan)!important}
++:host(.esq) .statsmini b,:host(.esq) .statsevolutionkpi b,:host(.esq) .perfstat b,:host(.esq) .personalstat b,:host(.esq) .statskpi > b,:host(.esq) .statskpi strong{
++  font-family:var(--esq-display)!important;font-size:22px!important;letter-spacing:1px!important;font-weight:400!important}
++
++/* barras de progresso: células de energia */
++:host(.esq) .statsbar,:host(.esq) .statstrackbar,:host(.esq) .statsmeter,:host(.esq) .personalprogress,:host(.esq) .perfprogress,:host(.esq) .perfbar{
++  border-radius:0!important;background:#0B0F18!important;box-shadow:inset 0 0 0 1px rgba(138,148,168,.22)!important}
++:host(.esq) .statsbar i,:host(.esq) .statstrackbar i,:host(.esq) .statsmeter i,:host(.esq) .personalprogress i,:host(.esq) .perfprogress i{
++  border-radius:0!important;background:repeating-linear-gradient(90deg,var(--esq-cyan) 0 7px,var(--esq-cyan-lo) 7px 9px)!important;box-shadow:0 0 10px rgba(34,200,255,.45)!important}
++:host(.esq) .perfbar i{border-radius:0!important}
++:host(.esq) .perfbar .hero{background:var(--esq-cyan)!important}
++:host(.esq) .perfbar .villain{background:var(--esq-red)!important}
++
++/* separadores de seção (eram azul #155bbd) */
++:host(.esq) .advblock+.advblock{border-top:1px solid rgba(34,200,255,.22)!important}
++:host(.esq) .advibadge{border-radius:0!important;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);background:var(--esq-red)!important;color:#fff!important;border:0!important}
++
++/* formulários */
++:host(.esq) select,:host(.esq) textarea{border-radius:0!important;background:#0B0F18!important;border:1px solid var(--esq-edge)!important;color:var(--esq-text)!important;font-family:var(--esq-label)!important;font-weight:700!important}
++:host(.esq) input:focus,:host(.esq) select:focus,:host(.esq) textarea:focus{outline:0!important;border-color:var(--esq-cyan)!important;box-shadow:0 0 0 1px var(--esq-cyan),0 0 12px rgba(34,200,255,.3)!important}
++
++/* textos longos dos painéis em Barlow (leitura) */
++:host(.esq) .perfsection p,:host(.esq) .perftraining p,:host(.esq) .statsdetail p,:host(.esq) .personalreason,:host(.esq) .reportdetail p,
++:host(.esq) .coachcard p,:host(.esq) .statsevolutionhero p,:host(.esq) .perfswotblock p{font-family:var(--esq-body)!important;font-weight:500!important;letter-spacing:0!important}
++
++/* "conteúdo em construção" (API, IA, Loja) */
++:host(.esq) .slot b{font-family:var(--esq-display)!important;font-size:22px!important;letter-spacing:2px!important;color:var(--esq-text)!important}
++:host(.esq) .slot small{font-family:var(--esq-body)!important;font-weight:500!important;font-size:13px!important;color:var(--esq-muted)!important;letter-spacing:0!important}
++:host(.esq) .slot{padding:28px 18px!important}
++
++/* rótulos das torres de configuração: até 3 linhas sem cortar */
++:host(.esq) .towers .tower{gap:6px!important;padding-left:4px!important;padding-right:4px!important}
++:host(.esq) .towers .tower b{font-size:14px!important;line-height:1!important}
++:host(.esq) .towers .tower svg{width:32px!important;height:32px!important}
++:host(.esq) .statspanel p,:host(.esq) .reportspanel p,:host(.esq) .performancepanel p{border-radius:0!important}
++:host(.esq) .towers .tower b{font-size:13px!important;line-height:.98!important}
 diff --git a/grinder-esquadrao.css b/grinder-esquadrao.css
 new file mode 100644
 index 0000000..4a24847
@@ -9884,7 +9966,7 @@ index 0000000..4a24847
 +  color:transparent!important;-webkit-text-fill-color:transparent!important;-webkit-text-stroke:0!important;text-shadow:none!important;
 +  filter:drop-shadow(0 4px 0 #0B0F18) drop-shadow(0 10px 18px rgba(0,0,0,.6))!important}
 diff --git a/index.html b/index.html
-index 3476277..4ce9962 100644
+index 3476277..392871c 100644
 --- a/index.html
 +++ b/index.html
 @@ -12,6 +12,10 @@
@@ -9893,8 +9975,8 @@ index 3476277..4ce9962 100644
  <link rel="preload" href="assets/logo-stackup-440.png" as="image">
 +<link rel="preload" href="assets/fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin>
 +<link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
-+<link rel="stylesheet" href="grinder-esquadrao.css?v=esq3">
-+<script src="core/stackup-esquadrao.js?v=esq3"></script>
++<link rel="stylesheet" href="grinder-esquadrao.css?v=esq4">
++<script src="core/stackup-esquadrao.js?v=esq4"></script>
  <style>html,body{margin:0;height:100%;background:#000}</style>
  
  <style id="grinderSplashStyle">

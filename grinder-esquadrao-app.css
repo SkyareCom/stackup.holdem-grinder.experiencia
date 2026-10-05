@@ -229,3 +229,81 @@
 @media (prefers-reduced-motion:reduce){:host(.esq) *{transition:none!important}}
 
 :host(.esq) .towers .tower b{font-size:15px!important;letter-spacing:1px!important;word-break:keep-all!important;overflow-wrap:normal!important}
+
+/* =====================================================================
+   MIGRAÇÃO COMPLETA — painéis internos (Batalha, Personal, Performance,
+   Perfil, Arquivo, Dossiê, Operações) e restos do azul antigo
+   ===================================================================== */
+/* botões dentro dos painéis */
+:host(.esq) .historypanel button,:host(.esq) .reportspanel button,:host(.esq) .statspanel button,:host(.esq) .personalpanel button,
+:host(.esq) .coachprofile button,:host(.esq) .performancepanel button,:host(.esq) .spotsaveform button{
+  border:0!important;border-radius:0!important;clip-path:var(--esq-cut-s);
+  background:var(--esq-plate)!important;box-shadow:var(--esq-plate-hl)!important;color:var(--esq-text)!important;
+  font-family:var(--esq-label)!important;font-weight:700!important;letter-spacing:1.5px!important;text-transform:uppercase}
+:host(.esq) .historypanel button.on,:host(.esq) .historypanel button.primary,:host(.esq) .statspanel button.primary,
+:host(.esq) .performancepanel button.primary,:host(.esq) .personalpanel button.primary,:host(.esq) .coachprofile button.coachsave,
+:host(.esq) .reportspanel button.on,:host(.esq) .coachprofile button.on,:host(.esq) .spotsaveform [data-spot-save-confirm]{
+  background:var(--esq-energy)!important;color:var(--esq-cyan-ink)!important;box-shadow:none!important}
+:host(.esq) .performancepanel .perftraining button,:host(.esq) .personalpanel .personalactions button{
+  background:transparent!important;box-shadow:inset 0 0 0 1px var(--esq-cyan)!important;color:var(--esq-cyan-hi)!important}
+:host(.esq) button.danger,:host(.esq) .dataaction.danger{background:rgba(227,38,59,.10)!important;box-shadow:inset 0 0 0 1px rgba(227,38,59,.55)!important;color:#FF7A88!important}
+/* abas internas (reafirmadas depois da regra genérica) */
+:host(.esq) .statspanel .statsnav button,:host(.esq) .statspanel .statsnav5 button,:host(.esq) .personalpanel .personaltabs button{
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)!important;background:#1A2030!important;color:var(--esq-muted)!important;box-shadow:none!important}
+:host(.esq) .statspanel .statsnav button.on,:host(.esq) .statspanel .statsnav5 button.on,:host(.esq) .personalpanel .personaltabs button.on{
+  background:var(--esq-energy)!important;color:var(--esq-cyan-ink)!important}
+:host(.esq) .statsnav,:host(.esq) .statsnav5,:host(.esq) .personaltabs{border:0!important;border-radius:0!important;background:#0B0F18!important;box-shadow:inset 0 0 0 1px var(--esq-edge)!important}
+
+/* placas secundárias */
+:host(.esq) .coachtemplate,:host(.esq) .perfdiff,:host(.esq) .perfevent,:host(.esq) .perfsection,:host(.esq) .perfside,:host(.esq) .perfstat,
+:host(.esq) .perfswotblock,:host(.esq) .personalstat,:host(.esq) .reportshead,:host(.esq) .statsadvancecard,:host(.esq) .statsevolutionkpi,
+:host(.esq) .statsmini,:host(.esq) .coachstatus,:host(.esq) .statsswot > *,:host(.esq) .perfpriorityitem,:host(.esq) .personalbadge,
+:host(.esq) .statsplan,:host(.esq) .statsdetail,:host(.esq) .perftraining,:host(.esq) .perfduel,:host(.esq) .personalhero,:host(.esq) .slot{
+  border:0!important;border-radius:0!important;clip-path:var(--esq-cut-s);
+  background:linear-gradient(180deg,#1A2030,#121722)!important;box-shadow:inset 0 0 0 1px var(--esq-edge)!important}
+:host(.esq) .perfside.hero{box-shadow:inset 0 0 0 1px var(--esq-cyan),inset 0 0 18px rgba(34,200,255,.18)!important}
+:host(.esq) .perfside.hero strong{color:var(--esq-cyan-hi)!important}
+:host(.esq) .perfside:not(.hero){box-shadow:inset 0 0 0 1px rgba(227,38,59,.55),inset 0 0 18px rgba(227,38,59,.14)!important}
+:host(.esq) .perfside:not(.hero) strong{color:#FF7A88!important}
+:host(.esq) .perfduel{background:linear-gradient(145deg,rgba(34,200,255,.10),#121722 50%,rgba(227,38,59,.10))!important}
+:host(.esq) .statslevel{border-radius:0!important;clip-path:var(--esq-hex);min-width:86px!important;padding:16px 8px!important;
+  background:linear-gradient(180deg,#3A1018,#1C0B10)!important;border:0!important;box-shadow:none!important}
+:host(.esq) .statslevel b{font-family:var(--esq-display)!important;color:#FF7A88!important;font-size:18px!important;letter-spacing:1.5px!important}
+:host(.esq) .statsadvancecard strong,:host(.esq) .perfpriorityitem strong{color:var(--esq-cyan)!important;font-family:var(--esq-display)!important}
+:host(.esq) .perfpriorityitem strong{border-radius:0!important;clip-path:var(--esq-hex);background:rgba(227,38,59,.25)!important;color:#fff!important}
+:host(.esq) .personalbadge{color:var(--esq-cyan)!important}
+:host(.esq) .statsmini b,:host(.esq) .statsevolutionkpi b,:host(.esq) .perfstat b,:host(.esq) .personalstat b,:host(.esq) .statskpi > b,:host(.esq) .statskpi strong{
+  font-family:var(--esq-display)!important;font-size:22px!important;letter-spacing:1px!important;font-weight:400!important}
+
+/* barras de progresso: células de energia */
+:host(.esq) .statsbar,:host(.esq) .statstrackbar,:host(.esq) .statsmeter,:host(.esq) .personalprogress,:host(.esq) .perfprogress,:host(.esq) .perfbar{
+  border-radius:0!important;background:#0B0F18!important;box-shadow:inset 0 0 0 1px rgba(138,148,168,.22)!important}
+:host(.esq) .statsbar i,:host(.esq) .statstrackbar i,:host(.esq) .statsmeter i,:host(.esq) .personalprogress i,:host(.esq) .perfprogress i{
+  border-radius:0!important;background:repeating-linear-gradient(90deg,var(--esq-cyan) 0 7px,var(--esq-cyan-lo) 7px 9px)!important;box-shadow:0 0 10px rgba(34,200,255,.45)!important}
+:host(.esq) .perfbar i{border-radius:0!important}
+:host(.esq) .perfbar .hero{background:var(--esq-cyan)!important}
+:host(.esq) .perfbar .villain{background:var(--esq-red)!important}
+
+/* separadores de seção (eram azul #155bbd) */
+:host(.esq) .advblock+.advblock{border-top:1px solid rgba(34,200,255,.22)!important}
+:host(.esq) .advibadge{border-radius:0!important;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);background:var(--esq-red)!important;color:#fff!important;border:0!important}
+
+/* formulários */
+:host(.esq) select,:host(.esq) textarea{border-radius:0!important;background:#0B0F18!important;border:1px solid var(--esq-edge)!important;color:var(--esq-text)!important;font-family:var(--esq-label)!important;font-weight:700!important}
+:host(.esq) input:focus,:host(.esq) select:focus,:host(.esq) textarea:focus{outline:0!important;border-color:var(--esq-cyan)!important;box-shadow:0 0 0 1px var(--esq-cyan),0 0 12px rgba(34,200,255,.3)!important}
+
+/* textos longos dos painéis em Barlow (leitura) */
+:host(.esq) .perfsection p,:host(.esq) .perftraining p,:host(.esq) .statsdetail p,:host(.esq) .personalreason,:host(.esq) .reportdetail p,
+:host(.esq) .coachcard p,:host(.esq) .statsevolutionhero p,:host(.esq) .perfswotblock p{font-family:var(--esq-body)!important;font-weight:500!important;letter-spacing:0!important}
+
+/* "conteúdo em construção" (API, IA, Loja) */
+:host(.esq) .slot b{font-family:var(--esq-display)!important;font-size:22px!important;letter-spacing:2px!important;color:var(--esq-text)!important}
+:host(.esq) .slot small{font-family:var(--esq-body)!important;font-weight:500!important;font-size:13px!important;color:var(--esq-muted)!important;letter-spacing:0!important}
+:host(.esq) .slot{padding:28px 18px!important}
+
+/* rótulos das torres de configuração: até 3 linhas sem cortar */
+:host(.esq) .towers .tower{gap:6px!important;padding-left:4px!important;padding-right:4px!important}
+:host(.esq) .towers .tower b{font-size:14px!important;line-height:1!important}
+:host(.esq) .towers .tower svg{width:32px!important;height:32px!important}
+:host(.esq) .statspanel p,:host(.esq) .reportspanel p,:host(.esq) .performancepanel p{border-radius:0!important}
+:host(.esq) .towers .tower b{font-size:13px!important;line-height:.98!important}

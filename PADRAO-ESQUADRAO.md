@@ -46,3 +46,7 @@ Resultado do spot: Correta = MISSÃO CUMPRIDA · Ajustável = AJUSTE TÁTICO · 
   - **Disciplina**: spots em que a ação indicada é fold/check.
 - Classe = maior atributo (Agressor, Estrategista, Inabalável, Sentinela); sem dados = Em avaliação.
 - Missão do dia: 20 spots respondidos no dia.
+
+## Cobertura
+Todas as telas usam o tema: login, abertura, QG, Briefing, Operações especiais, Missão (mesa, resultado, análise, salvar treino), Batalha (Resumo, Evolução, Situações, Sessões, Relatório), Personal, Performance (Eu Herói × Eu Vilão), Perfil (WhatsApp Coach, dados), Arquivo, Dossiê, API × API, Assistência IA e Loja.
+Componente novo deve usar as placas (`clip-path` chanfrado), não `border-radius`. Botões dentro dos painéis já herdam o visual: `.primary`/`.on` = energia ciano, `.danger` = contorno vermelho.
