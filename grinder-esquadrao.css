@@ -1,0 +1,96 @@
+/* =====================================================================
+   GRINDER · TEMA ESQUADRÃO — camada de documento (fontes, splash, login)
+   Ativo quando <html> tem a classe "esq" (core/stackup-esquadrao.js).
+   Desligar: abrir o app com ?theme=classic
+   ===================================================================== */
+
+@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/bebas-neue-400.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/barlow-condensed-600.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/barlow-condensed-700.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/barlow-500.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/barlow-600.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/barlow-700.woff2) format('woff2')}
+
+html.esq{
+  --esq-void:#07090F; --esq-steel-1:#1F2635; --esq-steel-2:#141924; --esq-edge:rgba(138,148,168,.28);
+  --esq-text:#EEF2F8; --esq-muted:#8F9AB0; --esq-dim:#6E7891;
+  --esq-cyan:#22C8FF; --esq-cyan-hi:#5CDBFF; --esq-cyan-lo:#0E9BD1; --esq-cyan-ink:#04131C;
+  --esq-red:#E3263B; --esq-red-hi:#FF4A5E; --esq-red-lo:#A3142A;
+  --esq-green:#3BE38A; --esq-amber:#FFB020;
+  --esq-display:'Bebas Neue','Barlow Condensed',sans-serif;
+  --esq-label:'Barlow Condensed','Barlow',sans-serif;
+  --esq-body:'Barlow',system-ui,sans-serif;
+  --esq-cut:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  /* tokens do padrão antigo apontando para o novo tema */
+  --f-ui:var(--esq-label); --f-brand:var(--esq-display); --brush:var(--esq-label);
+  --c-text:var(--esq-text); --c-muted:var(--esq-muted); --c-accent:var(--esq-cyan); --c-accent-text:var(--esq-cyan-hi);
+  --c-bg-top:var(--esq-void); --c-bg-bottom:#0B1222;
+}
+html.esq,html.esq body{background:var(--esq-void)!important}
+
+/* ---------- SPLASH ---------- */
+html.esq #grinderSplash{background:
+  linear-gradient(100deg,rgba(34,200,255,0) 30%,rgba(34,200,255,.10) 44%,rgba(34,200,255,0) 52%),
+  radial-gradient(70% 38% at 50% 40%,#1E3058 0%,rgba(30,48,88,0) 70%),#07090F!important}
+html.esq #grinderSplash .gs-cards{opacity:.0!important}
+html.esq #grinderSplash .gs-logo{filter:drop-shadow(0 0 24px rgba(34,200,255,.45))!important}
+html.esq #grinderSplash .gs-brand,html.esq #grinderSplash .gs-brand *{font-family:var(--esq-display)!important;letter-spacing:3px!important}
+
+/* ---------- LOGIN ---------- */
+html.esq body main.screen{background:
+  linear-gradient(100deg,rgba(34,200,255,0) 30%,rgba(34,200,255,.10) 44%,rgba(34,200,255,0) 52%),
+  linear-gradient(80deg,rgba(227,38,59,0) 50%,rgba(227,38,59,.09) 62%,rgba(227,38,59,0) 72%),
+  radial-gradient(70% 34% at 50% 20%,#1E3058 0%,rgba(30,48,88,0) 70%),
+  var(--esq-void)!important;color:var(--esq-text)}
+html.esq body main.screen .concrete,
+html.esq body main.screen .vignette,
+html.esq body main.screen .cardsbox{display:none!important}
+html.esq body main.screen .logo{filter:drop-shadow(0 0 26px rgba(34,200,255,.45))!important}
+html.esq body main.screen .namebase::before,
+html.esq body main.screen .namebase::after{display:none!important}
+html.esq body main.screen .brand{font-family:var(--esq-label)!important;font-weight:700!important;color:var(--esq-muted)!important;
+  font-size:15px!important;letter-spacing:5px!important;text-shadow:none!important}
+html.esq body main.screen .title{font-family:var(--esq-display)!important;font-size:clamp(72px,24vw,96px)!important;letter-spacing:4px!important;line-height:.9!important;
+  transform:none!important;color:transparent!important;
+  background:linear-gradient(180deg,#FFFFFF 0%,#C9D1E0 45%,#6B768C 55%,#AEB8CC 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  filter:drop-shadow(0 4px 0 #0B0F18) drop-shadow(0 10px 18px rgba(0,0,0,.6))!important;mix-blend-mode:normal!important;-webkit-text-stroke:0!important;text-shadow:none!important}
+html.esq body main.screen .tag.tag{position:relative;transform:none!important;background:none!important;border:0!important;box-shadow:none!important;
+  font-family:var(--esq-label)!important;font-weight:700!important;font-size:15px!important;letter-spacing:2px!important;color:var(--esq-text)!important;
+  padding:12px 0 0!important;text-transform:uppercase}
+html.esq body main.screen .tag.tag::before{content:"";position:absolute;left:50%;top:0;width:60px;height:3px;margin-left:-30px;background:var(--esq-red);box-shadow:0 0 10px rgba(227,38,59,.7)}
+
+html.esq body .actions .btn,html.esq body .lang .btn{border:0!important;border-radius:0!important;clip-path:var(--esq-cut);
+  background:linear-gradient(180deg,var(--esq-steel-1),var(--esq-steel-2))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px var(--esq-edge)!important;color:var(--esq-text)!important}
+html.esq body .btn .txt b{font-family:var(--esq-display)!important;font-size:20px!important;letter-spacing:1.5px!important;font-weight:400!important;color:var(--esq-text)!important}
+html.esq body .btn .txt small{font-family:var(--esq-label)!important;font-weight:600!important;font-size:13px!important;letter-spacing:1px!important;color:var(--esq-muted)!important;text-transform:uppercase}
+html.esq body .actions .btn .ic,html.esq body .lang .btn .ic{border-radius:0!important;border:0!important;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#0B0F18!important}
+html.esq body .btn .chev{color:var(--esq-muted)!important}
+/* entrada ativa (biometria) = botão de energia */
+html.esq body #biometricLoginCard{background:linear-gradient(180deg,var(--esq-cyan-hi) 0%,var(--esq-cyan) 55%,var(--esq-cyan-lo) 100%)!important;
+  box-shadow:none!important;filter:drop-shadow(0 0 14px rgba(34,200,255,.45))!important}
+html.esq body #biometricLoginCard .txt b{color:var(--esq-cyan-ink)!important}
+html.esq body #biometricLoginCard .txt small{color:#0B3A52!important}
+html.esq body #biometricLoginCard .chev{color:var(--esq-cyan-ink)!important}
+html.esq body #biometricLoginCard .ic svg{color:var(--esq-cyan)!important}
+html.esq body .btn.login-disabled{opacity:.55!important}
+html.esq body .btn[data-a="wa"] .ic svg{color:var(--esq-green)!important}
+html.esq body #langBtn .ic svg{color:var(--esq-amber)!important}
+html.esq body .lang .btn#langBtn[aria-expanded="true"]{box-shadow:inset 0 0 0 1px var(--esq-cyan)!important}
+html.esq body .menu{background:#0B0F18!important;border:1px solid var(--esq-edge)!important;border-radius:0!important}
+html.esq body .menu button{font-family:var(--esq-label)!important;font-weight:700!important;letter-spacing:1px!important;color:var(--esq-text)!important}
+html.esq body .menu button.on{color:var(--esq-cyan)!important}
+html.esq body .legal,html.esq body .legal span{font-family:var(--esq-body)!important;font-weight:500!important;color:var(--esq-muted)!important;letter-spacing:0!important}
+html.esq body .legal a{font-family:var(--esq-body)!important;color:var(--esq-cyan)!important}
+html.esq body > .toast,html.esq body main.screen .toast{font-family:var(--esq-label)!important;font-weight:700!important;background:#0B0F18!important;border:1px solid var(--esq-cyan)!important;border-radius:0!important}
+
+/* ---------- LOGO NAS CORES DO ESQUADRÃO ---------- */
+html.esq #grinderSplashLogo,html.esq body main.screen .logo img{content:url(assets/logo-esquadrao-440.png)}
+html.esq #grinderSplash .gs-brand{transform:none!important}
+html.esq #grinderSplash .gs-stackup{font-family:var(--esq-label)!important;font-weight:700!important;font-size:15px!important;letter-spacing:5px!important;color:var(--esq-muted)!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+html.esq #grinderSplash .gs-grinder{font-family:var(--esq-display)!important;font-size:clamp(64px,22vw,90px)!important;letter-spacing:4px!important;line-height:.95!important;
+  background:linear-gradient(180deg,#FFFFFF 0%,#C9D1E0 45%,#6B768C 55%,#AEB8CC 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;
+  color:transparent!important;-webkit-text-fill-color:transparent!important;-webkit-text-stroke:0!important;text-shadow:none!important;
+  filter:drop-shadow(0 4px 0 #0B0F18) drop-shadow(0 10px 18px rgba(0,0,0,.6))!important}
